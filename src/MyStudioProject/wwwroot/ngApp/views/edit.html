@@ -1,0 +1,25 @@
+﻿<form ng-submit="controller.editStudent()">
+    <div>
+        <label>
+            FirstName:
+            <input placeholder="FirstName" ng-model="controller.student.firstName" />
+        </label>
+
+        <label>
+            LastName:
+            <input placeholder="LastName" ng-model="controller.student.lastName" />
+        </label>
+
+        <label>
+            Hour:
+            <input placeholder="Hour" ng-model="controller.student.hour" />
+        </label>
+
+        <label>
+            Room:
+            <input placeholder="Room" ng-model="controller.student.room" />
+        </label>
+      
+    </div>
+    <input type="submit" value="Edit Student" />
+</form>

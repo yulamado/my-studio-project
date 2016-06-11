@@ -1,0 +1,34 @@
+﻿
+<form ng-show="account.getClaim('isAdmin')" ng-submit="controller.addStudent()">
+    
+    <label>
+        FirstName:
+        <input placeholder="FirstName" ng-model="controller.student.firstName" />
+    </label>
+        
+    <label>
+        LastName:
+        <input placeholder="LastName" ng-model="controller.student.lastName" />
+    </label>
+    
+    <label>
+        Hour:
+        <input placeholder="Hour" ng-model="controller.student.hour" />
+    </label>
+    
+    <label>
+        Room:
+        <input placeholder="Room" ng-model="controller.student.room" />
+    </label>
+    
+
+    <select ng-model="controller.student.rhythm" ng-options="rhythm.name for rhythm in controller.rhythms"></select>
+        
+    <select ng-model="controller.student.instructor" ng-options="instructor.fullName for instructor in controller.instructors"></select>
+
+
+    <button type="submit" class="btn btn-primary btn-md">Add Student</button>
+
+
+</form>
+
