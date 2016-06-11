@@ -1,34 +1,29 @@
-﻿
-<form ng-show="account.getClaim('isAdmin')" ng-submit="controller.addStudent()">
-    
-    <label>
-        FirstName:
-        <input placeholder="FirstName" ng-model="controller.student.firstName" />
-    </label>
-        
-    <label>
-        LastName:
-        <input placeholder="LastName" ng-model="controller.student.lastName" />
-    </label>
-    
-    <label>
-        Hour:
-        <input placeholder="Hour" ng-model="controller.student.hour" />
-    </label>
-    
-    <label>
-        Room:
-        <input placeholder="Room" ng-model="controller.student.room" />
-    </label>
-    
-
-    <select ng-model="controller.student.rhythm" ng-options="rhythm.name for rhythm in controller.rhythms"></select>
-        
-    <select ng-model="controller.student.instructor" ng-options="instructor.fullName for instructor in controller.instructors"></select>
-
-
-    <button type="submit" class="btn btn-primary btn-md">Add Student</button>
-
-
-</form>
-
+﻿<div class="jumbotron" ng-show="account.getClaim('isAdmin')">
+    <form class="form-horizontal" ng-submit="controller.addStudent()">
+        <div class="form-group col-md-4">
+            <label>FirstName</label>
+            <input placeholder="FirstName" class="form-control input-lg" ng-model="controller.student.firstName" />
+        </div>
+        <div class="form-group col-md-4">
+            <label>LastName</label>
+            <input placeholder="LastName" class="form-control input-lg" ng-model="controller.student.lastName" />
+        </div>
+        <div class="form-group col-md-4">
+            <label>Hour</label>
+            <input placeholder="Hour" class="form-control input-lg" ng-model="controller.student.hour" />
+        </div>
+        <div class="form-group col-md-4">
+            <label>Room</label>
+            <input placeholder="Room" class="form-control input-lg" ng-model="controller.student.room" />
+        </div>
+        <div class="col-md-3">
+            <label>Rhyhtm</label>
+            <select class="form-control input-lg" ng-model="controller.student.rhythm" ng-options="rhythm.name for rhythm in controller.rhythms" ></select> 
+        </div>
+        <div class="col-md-3">
+            <label>Instructor</label>
+            <select class="form-control input-lg" ng-model="controller.student.instructor" ng-options="instructor.fullName for instructor in controller.instructors"></select>
+        </div>        
+        <button type="submit" class="btn btn-primary btn-lg">Add Student</button>
+    </form>
+</div>

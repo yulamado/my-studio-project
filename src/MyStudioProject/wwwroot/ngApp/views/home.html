@@ -1,4 +1,5 @@
 <div class="jumbotron" ng-show="account.isLoggedIn()">
+    <h3 ng-show="account.getClaim('isAdmin')">This is the table for each instructor, log in as an instructor to see the content for each one of them !</h3>
     <table class="table table-bordered table table-striped">
         <thead>
             <tr class="success">
@@ -10,7 +11,7 @@
         </thead>
         <tbody>
 
-            <tr ng-repeat="student in controller.students">
+            <tr ng-repeat="student in controller.students" class="info">
                 <td>{{student.hour}}</td>
                 <td>{{student.firstName}} {{student.lastName}}</td>
                 <td>{{student.rhythm.name}}</td>

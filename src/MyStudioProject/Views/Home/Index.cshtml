@@ -9,10 +9,9 @@
     <div class="container">
         <h1>MyStudioProject</h1>
         <div>
-          <a href="/">Home</a> /
-           <a href="/addStudent" ng-show="account.getClaim('isAdmin')">Add Student /</a>
-            <a href="/secret" ng-show="account.getClaim('isAdmin')">Secret /</a>
-            <a href="/organizers" ng-show="account.getClaim('isAdmin')">Organizers /</a> 
+          <a href="/">Instructor Table</a> /
+            <a href="/organizers" ng-show="account.getClaim('isAdmin')">All Students /</a> 
+           <a href="/addStudent" ng-show="account.getClaim('isAdmin')">Add A Student /</a>      
            <a href="/login" ng-show="!account.isLoggedIn()">Login</a>
            <a href="#" ng-click="account.logout()" ng-show="account.isLoggedIn()">Logout</a>
            <div ng-show="account.isLoggedIn()">
