@@ -18,13 +18,7 @@ namespace MyStudioProject {
                 templateUrl: '/ngApp/views/secret.html',
                 controller: MyStudioProject.Controllers.SecretController,
                 controllerAs: 'controller'
-            })
-            .state('organizers', {
-                url: '/organizers',
-                templateUrl: '/ngApp/views/organizers.html',
-                controller: MyStudioProject.Controllers.OrganizerController,
-                controllerAs: 'controller'
-            })
+            })            
             .state('edit', {
                 url: '/edit/:id',
                 templateUrl: '/ngApp/views/edit.html',

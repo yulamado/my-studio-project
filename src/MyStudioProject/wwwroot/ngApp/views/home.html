@@ -1,12 +1,14 @@
-<div class="jumbotron" ng-show="account.isLoggedIn()">
-    <h3 ng-show="account.getClaim('isAdmin')">This is the table for each instructor, log in as an instructor to see the content for each one of them !</h3>
-    <table class="table table-bordered table table-striped">
+<div class="container-fluid" ng-show="account.isLoggedIn()">
+        <table class="table table-bordered table table-striped">
         <thead>
             <tr class="success">
                 <th>Hour</th>
-                <th>FullName</th>
-                <th>Rhythm</th>
+                <th>Name</th>
                 <th>Room</th>
+                <th ng-show="account.getClaim('isAdmin')">Edit</th>
+                <th>Rhythm</th>
+                <th ng-show="account.getClaim('isAdmin')">Instructor</th>
+                <th ng-show="account.getClaim('isAdmin')">Delete All</th>
             </tr>
         </thead>
         <tbody>
@@ -14,8 +16,11 @@
             <tr ng-repeat="student in controller.students" class="info">
                 <td>{{student.hour}}</td>
                 <td>{{student.firstName}} {{student.lastName}}</td>
-                <td>{{student.rhythm.name}}</td>
-                <td>{{student.room}}</td>                
+                <td>{{student.room}}</td>
+                <td ng-show="account.getClaim('isAdmin')"><button type="button" class="btn btn-primary btn-md" ui-sref="edit({id: student.id})">Edit Student</button></td> 
+                <td class="danger">{{student.rhythm.name}}</td>
+                <td class="danger" ng-show="account.getClaim('isAdmin')">{{student.instructor.fullName}}</td>
+                <td ng-show="account.getClaim('isAdmin')"><button type="button" class="btn btn-danger" ui-sref="delete({id: student.id})">Delete All</button></td>                               
             </tr>
 
         </tbody>

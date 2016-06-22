@@ -1,29 +1,46 @@
-﻿<div class="jumbotron" ng-show="account.getClaim('isAdmin')">
-    <form class="form-horizontal" ng-submit="controller.addStudent()">
-        <div class="form-group col-md-4">
-            <label>FirstName</label>
-            <input placeholder="FirstName" class="form-control input-lg" ng-model="controller.student.firstName" />
-        </div>
-        <div class="form-group col-md-4">
-            <label>LastName</label>
-            <input placeholder="LastName" class="form-control input-lg" ng-model="controller.student.lastName" />
-        </div>
-        <div class="form-group col-md-4">
-            <label>Hour</label>
-            <input placeholder="Hour" class="form-control input-lg" ng-model="controller.student.hour" />
-        </div>
-        <div class="form-group col-md-4">
-            <label>Room</label>
-            <input placeholder="Room" class="form-control input-lg" ng-model="controller.student.room" />
-        </div>
-        <div class="col-md-3">
-            <label>Rhyhtm</label>
-            <select class="form-control input-lg" ng-model="controller.student.rhythm" ng-options="rhythm.name for rhythm in controller.rhythms" ></select> 
-        </div>
-        <div class="col-md-3">
-            <label>Instructor</label>
-            <select class="form-control input-lg" ng-model="controller.student.instructor" ng-options="instructor.fullName for instructor in controller.instructors"></select>
-        </div>        
-        <button type="submit" class="btn btn-primary btn-lg">Add Student</button>
-    </form>
+﻿<style>
+    .center_div {
+        margin: 0 auto;
+        width: 80%; /* value of your choice which suits your alignment */
+    }     
+    
+</style>
+<div class="container-fluid  center_div" style="background-image:url(http://www.funchap.com/wp-content/uploads/2014/01/abstract-art-background.jpg)">
+    <div ng-show="account.getClaim('isAdmin')">
+        <form class="form-horizontal col-lg-4 center-block" role="form" ng-submit="controller.addStudent()">
+
+            <div class="form-group">
+                <label>FirstName</label>
+                <input placeholder="FirstName" class="form-control input-lg" ng-model="controller.student.firstName" />
+            </div>
+
+            <div class="form-group">
+                <label>LastName</label>
+                <input placeholder="LastName" class="form-control input-lg" ng-model="controller.student.lastName" />
+            </div>
+
+            <div class="form-group">
+                <label>Hour</label>
+                <input placeholder="Hour" class="form-control input-lg" ng-model="controller.student.hour" />
+            </div>
+
+            <div class="form-group">
+                <label>Room</label>
+                <input placeholder="Room" class="form-control input-lg" ng-model="controller.student.room" />
+            </div>
+
+            <div class="form-group">
+                <label>Rhyhtm</label>
+                <select class="form-control input-lg" ng-model="controller.student.rhythm" ng-options="rhythm.name for rhythm in controller.rhythms"></select>
+            </div>
+            <div class="form-group">
+                <label>Instructor</label>
+                <select class="form-control input-lg" ng-model="controller.student.instructor" ng-options="instructor.fullName for instructor in controller.instructors"></select>                
+            </div>           
+            
+            <button type="submit" class="btn btn-success btn-lg">Add Student</button>
+
+          </form>           
+    
+    </div>    
 </div>

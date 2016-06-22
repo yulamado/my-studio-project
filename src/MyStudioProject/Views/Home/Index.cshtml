@@ -6,18 +6,25 @@
     <base href="/" />
 </head>
 <body ng-controller="AccountController as account">
-    <div class="container">
-        <h1>MyStudioProject</h1>
-        <div>
-          <a href="/">Instructor Table</a> /
-            <a href="/organizers" ng-show="account.getClaim('isAdmin')">All Students /</a> 
-           <a href="/addStudent" ng-show="account.getClaim('isAdmin')">Add A Student /</a>      
-           <a href="/login" ng-show="!account.isLoggedIn()">Login</a>
-           <a href="#" ng-click="account.logout()" ng-show="account.isLoggedIn()">Logout</a>
-           <div ng-show="account.isLoggedIn()">
-               [{{account.getUserName()}}]
-           </div> 
+    
+    <img src="http://www.dancewithmekent.co.uk/ESW/Images/logo2.png" />
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">All Students</a></li>              
+                <li><a href="/addStudent" ng-show="account.getClaim('isAdmin')">Add A Student</a></li>
+                <li><a href="/login" ng-show="!account.isLoggedIn()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="#" ng-click="account.logout()" ng-show="account.isLoggedIn()"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>                          
+            </ul>            
         </div>
+    </nav>
+
+    <div ng-show="account.isLoggedIn()">
+       Hello [{{account.getUserName()}}]
+    </div>
+    <div>   
+     
         <hr />
 
         <ui-view></ui-view>

@@ -14,19 +14,7 @@ namespace MyStudioProject.Controllers {
         }
     }
 
-    export class OrganizerController {
-        private AllStudentsResource;
-        public studentsTwo;
-
-        public getAllStudents() {
-            this.studentsTwo = this.AllStudentsResource.query();
-        }
-
-        constructor(private $resource: angular.resource.IResourceService) {
-            this.AllStudentsResource = $resource('/api/organizers/:id');
-            this.getAllStudents();
-        }
-    }
+   
 
 
     export class SecretController {
@@ -58,11 +46,11 @@ namespace MyStudioProject.Controllers {
         }
 
         public addStudent() {
-            this.StudentResource.save(this.student).$promise.then(() => { this.$state.go('organizers') })
+            this.StudentResource.save(this.student).$promise.then(() => { this.$state.go('home') })
         }
 
         constructor(private $resource: angular.resource.IResourceService, private $state: ng.ui.IStateService) {
-            this.StudentResource = $resource('/api/organizers/:id');
+            this.StudentResource = $resource('/api/students/:id');
             this.RhythmsResource = $resource('/api/rhythms/:id');
             this.InstructorsResource = $resource('/api/instructors/:id');
 
@@ -79,12 +67,12 @@ namespace MyStudioProject.Controllers {
 
         editStudent() {
             this.StudentResource.save(this.student).$promise.then(
-                () => this.$state.go('organizers')
+                () => this.$state.go('home')
             );
         }
 
         constructor(private $resource: angular.resource.IResourceService, private $state: ng.ui.IStateService, private $stateParams: ng.ui.IStateParamsService) {
-            this.StudentResource = $resource('/api/organizers/:id');                    
+            this.StudentResource = $resource('/api/students/:id');                    
             this.student = this.StudentResource.get({ id: this.$stateParams['id'] })            
         }
     }
@@ -95,12 +83,12 @@ namespace MyStudioProject.Controllers {
 
         public deleteStudent(id) {
             this.StudentResource.delete(this.student).$promise.then(
-                () => this.$state.go('organizers')
+                () => this.$state.go('home')
             );
         }
 
         constructor(private $resource: angular.resource.IResourceService, private $state: ng.ui.IStateService, private $stateParams: ng.ui.IStateParamsService) {
-            this.StudentResource = $resource('/api/organizers/:id');
+            this.StudentResource = $resource('/api/students/:id');
             this.student = this.StudentResource.get({ id: this.$stateParams['id'] })
 
 

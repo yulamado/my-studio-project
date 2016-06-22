@@ -13,6 +13,7 @@ namespace MyStudioProject.API
     [Route("api/[controller]")]
     public class StudentsController : Controller
     {
+        private readonly string appAdmin = "name of user";        
         private ApplicationDbContext _db;
         public StudentsController(ApplicationDbContext db)
         {
@@ -23,7 +24,9 @@ namespace MyStudioProject.API
         public IEnumerable<Student> Get()
 
         {
-           
+            bool isAdmin = appAdmin == User.Identity.Name;
+            if (!User.HasClaim("isAdmin", "true"))
+            {
                 return (from s in _db.Students
                         where s.InstructorStudents.Any(si => si.Instructor.UserName == User.Identity.Name)
                         select new Student
@@ -33,23 +36,96 @@ namespace MyStudioProject.API
                             FirstName = s.FirstName,
                             LastName = s.LastName,
                             Hour = s.Hour,
-                            Room = s.Room,                           
+                            Room = s.Room,
                         }).ToList();
+            } else
+
+            {
+                return (from s in _db.Students
+
+                        select new Student
+                        {
+                            Id = s.Id,
+                            Rhythm = s.Rhythm,
+                            FirstName = s.FirstName,
+                            LastName = s.LastName,
+                            Hour = s.Hour,
+                            Room = s.Room,
+                            Instructor = s.Instructor
+                        }).ToList();
+            }
                        
         }
-
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            Student studentToReturn = _db.Students.FirstOrDefault(s => s.Id == id);
+            if (studentToReturn == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(studentToReturn);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]Student student)
-        {          
+        public IActionResult Post([FromBody]Student student)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(this.ModelState);
+            }
+
+            if (student.Id == 0)
+            {
+
+                var rhythm = (from r in _db.Rhythms where r.Id == student.Rhythm.Id select r).FirstOrDefault();
+
+                var instructor = (from u in _db.Users where u.FullName == student.Instructor.FullName select u).FirstOrDefault();
+
+                var studentToAdd = new Student
+                {
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Room = student.Room,
+                    Rhythm = rhythm,
+                    Hour = student.Hour,
+                    Instructor = instructor
+                };
+
+                _db.Students.Add(studentToAdd);
+                _db.SaveChanges();
+
+                var Student = (from t in _db.Students orderby t.Id descending select t).FirstOrDefault();
+
+                var instructorWithStudent = new InstructorStudent
+                {
+                    InstructorId = instructor.Id,
+                    Instructor = instructor,
+                    Student = Student,
+                    StudentId = Student.Id,
+                };
+                _db.InstructorStudents.Add(instructorWithStudent);
+                _db.SaveChanges();
+
+                return Ok(student);
+            }
+            else
+            {
+
+                var originalStudent = _db.Students.FirstOrDefault(s => s.Id == student.Id);
+                originalStudent.FirstName = student.FirstName;
+                originalStudent.LastName = student.LastName;
+                originalStudent.Hour = student.Hour;
+                originalStudent.Room = student.Room;
+                _db.SaveChanges();
+            }
+            return Ok(student);
         }
+
+
 
         // PUT api/values/5
         [HttpPut("{id}")]
@@ -59,8 +135,18 @@ namespace MyStudioProject.API
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            Student studentToDelete = _db.Students.FirstOrDefault(m => m.Id == id);
+            if (studentToDelete == null)
+            {
+                return NotFound();
+            }
+            _db.Students.Remove(studentToDelete);
+            _db.SaveChanges();
+            return Ok();
         }
     }
 }
+
+
